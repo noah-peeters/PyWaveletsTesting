@@ -2,10 +2,11 @@
 import numpy as np
 cimport numpy as np
 from libc.time cimport time, time_t
-from libc.math cimport floor, sqrt, abs
+from libc.math cimport floor, sqrt, abs, ceil, fmod
 cimport cython
 from libc.stdio cimport printf
 from posix.time cimport clock_gettime, timespec, CLOCK_REALTIME
+import pywt
 
 # Get accurate time
 cdef get_time():
@@ -15,26 +16,52 @@ cdef get_time():
     current = ts.tv_sec + (ts.tv_nsec / 1000000000.)
     return current
 
+# Append zeros to array if not nicely divisible by kernel_size (y, x)
+def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
+    # Must be floats for division later on
+    cdef float img_height = array.shape[0]
+    cdef float img_width = array.shape[1]
+    cdef float tile_height = kernel_size[0]
+    cdef float tile_width = kernel_size[1]
+
+    cdef double y_padding_width = 0
+    cdef double x_padding_width = 0
+    cdef float intercalc
+
+    cdef double y_remainder = fmod(img_height, tile_height)
+    if y_remainder != 0:
+        # Add padding on y-axis (equally on both sides)
+        intercalc = ceil(img_height / tile_height)
+        y_padding_width = (intercalc * tile_height) - img_height
+    cdef double x_remainder = fmod(img_width, tile_width)
+    if x_remainder != 0:
+        # Add padding on x-axis (equally on both sides)
+        intercalc = ceil(img_width / tile_width)
+        x_padding_width = (intercalc * tile_width) - img_width
+    
+    # Pad array (if neccessary)
+    return np.pad(array, [(0, int(y_padding_width)), (0, int(x_padding_width))], mode="constant", constant_values=0)
+
 # Split array into smaller blocks (kernel_size)
 # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
 def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
     cdef double start_time = get_time()
 
+    # Pad array (if neccessary)
+    array = pad_array(array, kernel_size)
+
     cdef int img_height = array.shape[0]
     cdef int img_width = array.shape[1]
-
     cdef int tile_height = kernel_size[0]
     cdef int tile_width = kernel_size[1]
 
-    cdef float div1 = floor(img_height / tile_height) # "floor" returns a float
-    cdef float div2 = floor(img_width / tile_width)
-
+    # Reshape array (tiling)
     cdef np.ndarray tiled_array = array.reshape(
         (
-            int(div1),
-            tile_height,
-            int(div2),
-            tile_width,
+            int(floor(img_height / tile_height)), # "floor" returns a float
+            int(tile_height),
+            int(floor(img_width / tile_width)),
+            int(tile_width),
         )
     )
     tiled_array = tiled_array.swapaxes(1, 2)

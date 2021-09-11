@@ -7,10 +7,10 @@ from time import time
 
 input_folder = "test_images/input/"
 output_folder = "test_images/output/"
-wavelet_to_use = "db2"
-spatial_frequency_kernel_size = (87, 3001)  # Spatial frequency block size in pixels
+wavelet_to_use = "haar"
+spatial_frequency_kernel_size = (50, 50)  # Spatial frequency block size in pixels
 
-from algorithms import spatial_frequency, sum_modified_laplacian, reshape_split_array
+from algorithms import spatial_frequency, sum_modified_laplacian, reshape_split_array, pad_array
 
 def _time_it(f):
     def wrapper(*args):
@@ -60,7 +60,7 @@ def compute_focus_measures(
                 fm_per_tile[y_index, x_index] = focus_measure
         fm_per_array.insert(i, fm_per_tile)
 
-    output_array = np.empty_like(src_arrays[0])
+    output_array = np.empty_like(pad_array(src_arrays[0], np.array(kernel_size)))  # Also add zeros padding
     # Loop through every tile
     for y_tile_index, _ in enumerate(tiles_per_array[0]):
         y_offset = y_tile_index * kernel_size[0]
