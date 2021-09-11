@@ -1,32 +1,42 @@
 import time
 import numpy as np
-import cython
+import math
 
-@cython.boundscheck(False) # turn off bounds-checking for entire function
-@cython.wraparound(False)  # turn off negative index wrapping for entire function
-def spatial_frequency(ca):
-    start_time = time.time()
-    row_frequency = np.empty_like(ca)
-    column_frequency = np.empty_like(ca)
+def _time_it(f):
+    def wrapper(*args):
+        start = time()
+        r = f(*args)
+        end = time()
+        print("timed %s: %f" % (f.__name__, end - start))
+        return r
 
-    cdef int x, y
-    cdef int h = ca.shape[0]
-    cdef int w = ca.shape[1]
+    return wrapper
+
+# Compute spatial frequency of array
+@_time_it
+def spatial_frequency(ca: np.ndarray):
+
+    cdef int x, y, w, h
+
+    cdef float row_frequency = 0
+    cdef float column_frequency = 0
+
+    h = ca.shape[0] - 1  # Python lists begin at index 0
+    w = ca.shape[1] - 1
 
     # Row frequency
     for y in range(0, h):
-        for x in range(1, w): # Start one further
-            row_frequency[y, x] = (ca[y, x] - ca[y - 1, x]) ** 2
+        for x in range(1, w):  # Start one further
+            row_frequency += (ca[y, x] - ca[y - 1, x]) ** 2
     # Column frequency
-    for x in range(0, w): # Start one further
+    for x in range(0, w):  # Start one further
         for y in range(1, h):
-            column_frequency[y, x] = (ca[y, x] - ca[y, x - 1]) ** 2
+            column_frequency += (ca[y, x] - ca[y - 1, x]) ** 2
 
     mXn = 1 / (ca.shape[0] * ca.shape[1])
-    row_frequency = np.sqrt(row_frequency * mXn)
-    column_frequency = np.sqrt(column_frequency * mXn)
+    row_frequency = math.sqrt(mXn * row_frequency)
+    column_frequency = math.sqrt(mXn * column_frequency)
 
     # Spatial frequency of "ca"
-    sf = np.sqrt(np.add(column_frequency ** 2, row_frequency ** 2))
-    print("--- Spatial frequency computation took %s seconds ---" % (time.time() - start_time))
+    sf = math.sqrt((column_frequency ** 2) + (row_frequency ** 2))
     return sf
