@@ -1,10 +1,7 @@
 # type: ignore
 import numpy as np
 cimport numpy as np
-from libc.time cimport time, time_t
 from libc.math cimport floor, sqrt, abs, ceil, fmod
-cimport cython
-import pywt
 
 # Append zeros to array if not nicely divisible by kernel_size (y, x)
 def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
@@ -57,32 +54,32 @@ def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.in
     return tiled_array
 
 # Compute spatial frequency of array
-def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):
+def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):
     cdef int x, y
     cdef float calc
 
     cdef float row_frequency = 0
     cdef float column_frequency = 0
-
-    cdef int h = ca.shape[0] - 1  # Python lists begin at index 0
-    cdef int w = ca.shape[1] - 1
+    # Floats for calculation
+    cdef float h = array.shape[0]
+    cdef float w = array.shape[1]
 
     # Row frequency
-    for y in range(0, h):
-        for x in range(1, w):  # Start one further
-            calc = (ca[y, x] - ca[y - 1, x]) ** 2
+    for y in range(0, int(h)):
+        for x in range(1, int(w)):  # Start one further
+            calc = (array[y, x] - array[y - 1, x]) ** 2
             row_frequency += calc
     # Column frequency
-    for x in range(0, w):  # Start one further
-        for y in range(1, h):
-            calc = (ca[y, x] - ca[y - 1, x]) ** 2
+    for x in range(0, int(w)):  # Start one further
+        for y in range(1, int(h)):
+            calc = (array[y, x] - array[y - 1, x]) ** 2
             column_frequency += calc
 
-    cdef float mXn = 1 / ((h + 1) * (w + 1))
+    cdef float mXn = 1 / (h * w)
     row_frequency = sqrt(mXn * row_frequency)
     column_frequency = sqrt(mXn * column_frequency)
 
-    # Spatial frequency of "ca"
+    # Spatial frequency of array
     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))
     return sf
 

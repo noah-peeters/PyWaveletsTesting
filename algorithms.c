@@ -1432,9 +1432,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
 
 #define __Pyx_BufPtrStrided2d(type, buf, i0, s0, i1, s1) (type)((char*)buf + i0 * s0 + i1 * s1)
-/* None.proto */
-static CYTHON_INLINE long __Pyx_div_long(long, long);
-
 /* GetTopmostException.proto */
 #if CYTHON_USE_EXC_INFO_STACK
 static _PyErr_StackItem * __Pyx_PyErr_GetTopmostException(PyThreadState *tstate);
@@ -1642,11 +1639,11 @@ static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
-
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
+
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* FastTypeChecks.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -1728,7 +1725,6 @@ static const char __pyx_k_h[] = "h";
 static const char __pyx_k_w[] = "w";
 static const char __pyx_k_x[] = "x";
 static const char __pyx_k_y[] = "y";
-static const char __pyx_k_ca[] = "ca";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_sf[] = "sf";
 static const char __pyx_k_mXn[] = "mXn";
@@ -1780,7 +1776,6 @@ static PyObject *__pyx_n_s_ImportError;
 static PyObject *__pyx_n_s_algorithms;
 static PyObject *__pyx_kp_s_algorithms_pyx;
 static PyObject *__pyx_n_s_array;
-static PyObject *__pyx_n_s_ca;
 static PyObject *__pyx_n_s_calc;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_column_frequency;
@@ -1830,7 +1825,7 @@ static PyObject *__pyx_n_s_y_remainder;
 static PyObject *__pyx_n_s_y_step;
 static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_array, PyArrayObject *__pyx_v_kernel_size); /* proto */
 static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_array, PyArrayObject *__pyx_v_kernel_size); /* proto */
-static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_ca); /* proto */
+static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_array); /* proto */
 static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_array, int __pyx_v_threshhold); /* proto */
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -2693,23 +2688,23 @@ static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObje
 /* "algorithms.pyx":60
  * 
  * # Compute spatial frequency of array
- * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):             # <<<<<<<<<<<<<<
+ * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, PyObject *__pyx_v_ca); /*proto*/
+static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, PyObject *__pyx_v_array); /*proto*/
 static PyMethodDef __pyx_mdef_10algorithms_5spatial_frequency = {"spatial_frequency", (PyCFunction)__pyx_pw_10algorithms_5spatial_frequency, METH_O, 0};
-static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, PyObject *__pyx_v_ca) {
+static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, PyObject *__pyx_v_array) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("spatial_frequency (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_ca), __pyx_ptype_5numpy_ndarray, 1, "ca", 0))) __PYX_ERR(0, 60, __pyx_L1_error)
-  __pyx_r = __pyx_pf_10algorithms_4spatial_frequency(__pyx_self, ((PyArrayObject *)__pyx_v_ca));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_r = __pyx_pf_10algorithms_4spatial_frequency(__pyx_self, ((PyArrayObject *)__pyx_v_array));
 
   /* function exit code */
   goto __pyx_L0;
@@ -2720,53 +2715,53 @@ static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, 
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_ca) {
+static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_array) {
   int __pyx_v_x;
   int __pyx_v_y;
   float __pyx_v_calc;
   float __pyx_v_row_frequency;
   float __pyx_v_column_frequency;
-  int __pyx_v_h;
-  int __pyx_v_w;
+  float __pyx_v_h;
+  float __pyx_v_w;
   float __pyx_v_mXn;
   float __pyx_v_sf;
-  __Pyx_LocalBuf_ND __pyx_pybuffernd_ca;
-  __Pyx_Buffer __pyx_pybuffer_ca;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_array;
+  __Pyx_Buffer __pyx_pybuffer_array;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  int __pyx_t_2;
+  long __pyx_t_1;
+  long __pyx_t_2;
   int __pyx_t_3;
-  int __pyx_t_4;
-  int __pyx_t_5;
+  long __pyx_t_4;
+  long __pyx_t_5;
   int __pyx_t_6;
   Py_ssize_t __pyx_t_7;
   Py_ssize_t __pyx_t_8;
   int __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   Py_ssize_t __pyx_t_11;
-  long __pyx_t_12;
+  float __pyx_t_12;
   PyObject *__pyx_t_13 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("spatial_frequency", 0);
-  __pyx_pybuffer_ca.pybuffer.buf = NULL;
-  __pyx_pybuffer_ca.refcount = 0;
-  __pyx_pybuffernd_ca.data = NULL;
-  __pyx_pybuffernd_ca.rcbuffer = &__pyx_pybuffer_ca;
+  __pyx_pybuffer_array.pybuffer.buf = NULL;
+  __pyx_pybuffer_array.refcount = 0;
+  __pyx_pybuffernd_array.data = NULL;
+  __pyx_pybuffernd_array.rcbuffer = &__pyx_pybuffer_array;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_ca.rcbuffer->pybuffer, (PyObject*)__pyx_v_ca, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 60, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 60, __pyx_L1_error)
   }
-  __pyx_pybuffernd_ca.diminfo[0].strides = __pyx_pybuffernd_ca.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_ca.diminfo[0].shape = __pyx_pybuffernd_ca.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_ca.diminfo[1].strides = __pyx_pybuffernd_ca.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_ca.diminfo[1].shape = __pyx_pybuffernd_ca.rcbuffer->pybuffer.shape[1];
+  __pyx_pybuffernd_array.diminfo[0].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_array.diminfo[0].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_array.diminfo[1].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_array.diminfo[1].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[1];
 
   /* "algorithms.pyx":64
  *     cdef float calc
  * 
  *     cdef float row_frequency = 0             # <<<<<<<<<<<<<<
  *     cdef float column_frequency = 0
- * 
+ *     # Floats for calculation
  */
   __pyx_v_row_frequency = 0.0;
 
@@ -2774,57 +2769,57 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  * 
  *     cdef float row_frequency = 0
  *     cdef float column_frequency = 0             # <<<<<<<<<<<<<<
- * 
- *     cdef int h = ca.shape[0] - 1  # Python lists begin at index 0
+ *     # Floats for calculation
+ *     cdef float h = array.shape[0]
  */
   __pyx_v_column_frequency = 0.0;
 
   /* "algorithms.pyx":67
  *     cdef float column_frequency = 0
- * 
- *     cdef int h = ca.shape[0] - 1  # Python lists begin at index 0             # <<<<<<<<<<<<<<
- *     cdef int w = ca.shape[1] - 1
+ *     # Floats for calculation
+ *     cdef float h = array.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef float w = array.shape[1]
  * 
  */
-  __pyx_v_h = ((__pyx_v_ca->dimensions[0]) - 1);
+  __pyx_v_h = (__pyx_v_array->dimensions[0]);
 
   /* "algorithms.pyx":68
- * 
- *     cdef int h = ca.shape[0] - 1  # Python lists begin at index 0
- *     cdef int w = ca.shape[1] - 1             # <<<<<<<<<<<<<<
+ *     # Floats for calculation
+ *     cdef float h = array.shape[0]
+ *     cdef float w = array.shape[1]             # <<<<<<<<<<<<<<
  * 
  *     # Row frequency
  */
-  __pyx_v_w = ((__pyx_v_ca->dimensions[1]) - 1);
+  __pyx_v_w = (__pyx_v_array->dimensions[1]);
 
   /* "algorithms.pyx":71
  * 
  *     # Row frequency
- *     for y in range(0, h):             # <<<<<<<<<<<<<<
- *         for x in range(1, w):  # Start one further
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *     for y in range(0, int(h)):             # <<<<<<<<<<<<<<
+ *         for x in range(1, int(w)):  # Start one further
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  */
-  __pyx_t_1 = __pyx_v_h;
+  __pyx_t_1 = ((long)__pyx_v_h);
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_y = __pyx_t_3;
 
     /* "algorithms.pyx":72
  *     # Row frequency
- *     for y in range(0, h):
- *         for x in range(1, w):  # Start one further             # <<<<<<<<<<<<<<
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *     for y in range(0, int(h)):
+ *         for x in range(1, int(w)):  # Start one further             # <<<<<<<<<<<<<<
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             row_frequency += calc
  */
-    __pyx_t_4 = __pyx_v_w;
+    __pyx_t_4 = ((long)__pyx_v_w);
     __pyx_t_5 = __pyx_t_4;
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_x = __pyx_t_6;
 
       /* "algorithms.pyx":73
- *     for y in range(0, h):
- *         for x in range(1, w):  # Start one further
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
+ *     for y in range(0, int(h)):
+ *         for x in range(1, int(w)):  # Start one further
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
  *             row_frequency += calc
  *     # Column frequency
  */
@@ -2832,13 +2827,13 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       __pyx_t_8 = __pyx_v_x;
       __pyx_t_9 = -1;
       if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_ca.diminfo[0].shape;
+        __pyx_t_7 += __pyx_pybuffernd_array.diminfo[0].shape;
         if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_ca.diminfo[0].shape)) __pyx_t_9 = 0;
+      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_array.diminfo[0].shape)) __pyx_t_9 = 0;
       if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_ca.diminfo[1].shape;
+        __pyx_t_8 += __pyx_pybuffernd_array.diminfo[1].shape;
         if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_ca.diminfo[1].shape)) __pyx_t_9 = 1;
+      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 73, __pyx_L1_error)
@@ -2847,25 +2842,25 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       __pyx_t_11 = __pyx_v_x;
       __pyx_t_9 = -1;
       if (__pyx_t_10 < 0) {
-        __pyx_t_10 += __pyx_pybuffernd_ca.diminfo[0].shape;
+        __pyx_t_10 += __pyx_pybuffernd_array.diminfo[0].shape;
         if (unlikely(__pyx_t_10 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_ca.diminfo[0].shape)) __pyx_t_9 = 0;
+      } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_array.diminfo[0].shape)) __pyx_t_9 = 0;
       if (__pyx_t_11 < 0) {
-        __pyx_t_11 += __pyx_pybuffernd_ca.diminfo[1].shape;
+        __pyx_t_11 += __pyx_pybuffernd_array.diminfo[1].shape;
         if (unlikely(__pyx_t_11 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_ca.diminfo[1].shape)) __pyx_t_9 = 1;
+      } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 73, __pyx_L1_error)
       }
-      __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_ca.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_ca.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_ca.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_ca.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_ca.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_ca.diminfo[1].strides))), 2.0);
+      __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_array.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_array.diminfo[1].strides))), 2.0);
 
       /* "algorithms.pyx":74
- *         for x in range(1, w):  # Start one further
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *         for x in range(1, int(w)):  # Start one further
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             row_frequency += calc             # <<<<<<<<<<<<<<
  *     # Column frequency
- *     for x in range(0, w):  # Start one further
+ *     for x in range(0, int(w)):  # Start one further
  */
       __pyx_v_row_frequency = (__pyx_v_row_frequency + __pyx_v_calc);
     }
@@ -2874,31 +2869,31 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   /* "algorithms.pyx":76
  *             row_frequency += calc
  *     # Column frequency
- *     for x in range(0, w):  # Start one further             # <<<<<<<<<<<<<<
- *         for y in range(1, h):
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *     for x in range(0, int(w)):  # Start one further             # <<<<<<<<<<<<<<
+ *         for y in range(1, int(h)):
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  */
-  __pyx_t_1 = __pyx_v_w;
+  __pyx_t_1 = ((long)__pyx_v_w);
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_x = __pyx_t_3;
 
     /* "algorithms.pyx":77
  *     # Column frequency
- *     for x in range(0, w):  # Start one further
- *         for y in range(1, h):             # <<<<<<<<<<<<<<
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *     for x in range(0, int(w)):  # Start one further
+ *         for y in range(1, int(h)):             # <<<<<<<<<<<<<<
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             column_frequency += calc
  */
-    __pyx_t_4 = __pyx_v_h;
+    __pyx_t_4 = ((long)__pyx_v_h);
     __pyx_t_5 = __pyx_t_4;
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_y = __pyx_t_6;
 
       /* "algorithms.pyx":78
- *     for x in range(0, w):  # Start one further
- *         for y in range(1, h):
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
+ *     for x in range(0, int(w)):  # Start one further
+ *         for y in range(1, int(h)):
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
  *             column_frequency += calc
  * 
  */
@@ -2906,13 +2901,13 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       __pyx_t_10 = __pyx_v_x;
       __pyx_t_9 = -1;
       if (__pyx_t_11 < 0) {
-        __pyx_t_11 += __pyx_pybuffernd_ca.diminfo[0].shape;
+        __pyx_t_11 += __pyx_pybuffernd_array.diminfo[0].shape;
         if (unlikely(__pyx_t_11 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_ca.diminfo[0].shape)) __pyx_t_9 = 0;
+      } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_array.diminfo[0].shape)) __pyx_t_9 = 0;
       if (__pyx_t_10 < 0) {
-        __pyx_t_10 += __pyx_pybuffernd_ca.diminfo[1].shape;
+        __pyx_t_10 += __pyx_pybuffernd_array.diminfo[1].shape;
         if (unlikely(__pyx_t_10 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_ca.diminfo[1].shape)) __pyx_t_9 = 1;
+      } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 78, __pyx_L1_error)
@@ -2921,25 +2916,25 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       __pyx_t_7 = __pyx_v_x;
       __pyx_t_9 = -1;
       if (__pyx_t_8 < 0) {
-        __pyx_t_8 += __pyx_pybuffernd_ca.diminfo[0].shape;
+        __pyx_t_8 += __pyx_pybuffernd_array.diminfo[0].shape;
         if (unlikely(__pyx_t_8 < 0)) __pyx_t_9 = 0;
-      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_ca.diminfo[0].shape)) __pyx_t_9 = 0;
+      } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_array.diminfo[0].shape)) __pyx_t_9 = 0;
       if (__pyx_t_7 < 0) {
-        __pyx_t_7 += __pyx_pybuffernd_ca.diminfo[1].shape;
+        __pyx_t_7 += __pyx_pybuffernd_array.diminfo[1].shape;
         if (unlikely(__pyx_t_7 < 0)) __pyx_t_9 = 1;
-      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_ca.diminfo[1].shape)) __pyx_t_9 = 1;
+      } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 78, __pyx_L1_error)
       }
-      __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_ca.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_ca.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_ca.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_ca.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_ca.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_ca.diminfo[1].strides))), 2.0);
+      __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_array.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_array.diminfo[1].strides))), 2.0);
 
       /* "algorithms.pyx":79
- *         for y in range(1, h):
- *             calc = (ca[y, x] - ca[y - 1, x]) ** 2
+ *         for y in range(1, int(h)):
+ *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             column_frequency += calc             # <<<<<<<<<<<<<<
  * 
- *     cdef float mXn = 1 / ((h + 1) * (w + 1))
+ *     cdef float mXn = 1 / (h * w)
  */
       __pyx_v_column_frequency = (__pyx_v_column_frequency + __pyx_v_calc);
     }
@@ -2948,24 +2943,20 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   /* "algorithms.pyx":81
  *             column_frequency += calc
  * 
- *     cdef float mXn = 1 / ((h + 1) * (w + 1))             # <<<<<<<<<<<<<<
+ *     cdef float mXn = 1 / (h * w)             # <<<<<<<<<<<<<<
  *     row_frequency = sqrt(mXn * row_frequency)
  *     column_frequency = sqrt(mXn * column_frequency)
  */
-  __pyx_t_12 = ((__pyx_v_h + 1) * (__pyx_v_w + 1));
+  __pyx_t_12 = (__pyx_v_h * __pyx_v_w);
   if (unlikely(__pyx_t_12 == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
     __PYX_ERR(0, 81, __pyx_L1_error)
   }
-  else if (sizeof(long) == sizeof(long) && (!(((long)-1) > 0)) && unlikely(__pyx_t_12 == (long)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(1))) {
-    PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
-    __PYX_ERR(0, 81, __pyx_L1_error)
-  }
-  __pyx_v_mXn = __Pyx_div_long(1, __pyx_t_12);
+  __pyx_v_mXn = (1.0 / __pyx_t_12);
 
   /* "algorithms.pyx":82
  * 
- *     cdef float mXn = 1 / ((h + 1) * (w + 1))
+ *     cdef float mXn = 1 / (h * w)
  *     row_frequency = sqrt(mXn * row_frequency)             # <<<<<<<<<<<<<<
  *     column_frequency = sqrt(mXn * column_frequency)
  * 
@@ -2973,17 +2964,17 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   __pyx_v_row_frequency = sqrt((__pyx_v_mXn * __pyx_v_row_frequency));
 
   /* "algorithms.pyx":83
- *     cdef float mXn = 1 / ((h + 1) * (w + 1))
+ *     cdef float mXn = 1 / (h * w)
  *     row_frequency = sqrt(mXn * row_frequency)
  *     column_frequency = sqrt(mXn * column_frequency)             # <<<<<<<<<<<<<<
  * 
- *     # Spatial frequency of "ca"
+ *     # Spatial frequency of array
  */
   __pyx_v_column_frequency = sqrt((__pyx_v_mXn * __pyx_v_column_frequency));
 
   /* "algorithms.pyx":86
  * 
- *     # Spatial frequency of "ca"
+ *     # Spatial frequency of array
  *     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))             # <<<<<<<<<<<<<<
  *     return sf
  * 
@@ -2991,7 +2982,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   __pyx_v_sf = sqrt((powf(__pyx_v_column_frequency, 2.0) + powf(__pyx_v_row_frequency, 2.0)));
 
   /* "algorithms.pyx":87
- *     # Spatial frequency of "ca"
+ *     # Spatial frequency of array
  *     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))
  *     return sf             # <<<<<<<<<<<<<<
  * 
@@ -3007,7 +2998,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   /* "algorithms.pyx":60
  * 
  * # Compute spatial frequency of array
- * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):             # <<<<<<<<<<<<<<
+ * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
@@ -3019,13 +3010,13 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
     __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
-    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ca.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_array.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
   __Pyx_AddTraceback("algorithms.spatial_frequency", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
-  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_ca.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_array.rcbuffer->pybuffer);
   __pyx_L2:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -4466,7 +4457,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_algorithms, __pyx_k_algorithms, sizeof(__pyx_k_algorithms), 0, 0, 1, 1},
   {&__pyx_kp_s_algorithms_pyx, __pyx_k_algorithms_pyx, sizeof(__pyx_k_algorithms_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
-  {&__pyx_n_s_ca, __pyx_k_ca, sizeof(__pyx_k_ca), 0, 0, 1, 1},
   {&__pyx_n_s_calc, __pyx_k_calc, sizeof(__pyx_k_calc), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_column_frequency, __pyx_k_column_frequency, sizeof(__pyx_k_column_frequency), 0, 0, 1, 1},
@@ -4588,11 +4578,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "algorithms.pyx":60
  * 
  * # Compute spatial frequency of array
- * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):             # <<<<<<<<<<<<<<
+ * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
-  __pyx_tuple__8 = PyTuple_Pack(10, __pyx_n_s_ca, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_calc, __pyx_n_s_row_frequency, __pyx_n_s_column_frequency, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_mXn, __pyx_n_s_sf); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(10, __pyx_n_s_array, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_calc, __pyx_n_s_row_frequency, __pyx_n_s_column_frequency, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_mXn, __pyx_n_s_sf); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
   __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_spatial_frequency, 60, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 60, __pyx_L1_error)
@@ -4991,7 +4981,7 @@ if (!__Pyx_RefNanny) {
   /* "algorithms.pyx":60
  * 
  * # Compute spatial frequency of array
- * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):             # <<<<<<<<<<<<<<
+ * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
@@ -6200,14 +6190,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     Py_DECREF(function);
 done:
     return result;
-}
-
-/* None */
-  static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
-    long q = a / b;
-    long r = a - q*b;
-    q -= ((r != 0) & ((r ^ b) < 0));
-    return q;
 }
 
 /* GetTopmostException */
@@ -7441,44 +7423,6 @@ raise_neg_overflow:
     }
 }
 
-/* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const long neg_one = (long) -1, const_zero = (long) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
-}
-
 /* CIntFromPy */
   static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -7673,6 +7617,44 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
+}
+
+/* CIntToPy */
+  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const long neg_one = (long) -1, const_zero = (long) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
 }
 
 /* FastTypeChecks */

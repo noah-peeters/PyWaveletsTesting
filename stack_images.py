@@ -9,8 +9,16 @@ input_folder = "test_images/input/"
 output_folder = "test_images/output/"
 wavelet_to_use = "haar"
 spatial_frequency_kernel_size = (50, 50)  # Spatial frequency block size in pixels
+sum_modified_laplacian_kernel_size = (25, 25)
+SML_threshold = 4
 
-from algorithms import spatial_frequency, sum_modified_laplacian, reshape_split_array, pad_array
+from algorithms import (
+    spatial_frequency,
+    sum_modified_laplacian,
+    reshape_split_array,
+    pad_array,
+)
+
 
 def _time_it(f):
     def wrapper(*args):
@@ -51,7 +59,7 @@ def compute_focus_measures(
         for y_index, _ in enumerate(tiles):
             for x_index, _ in enumerate(tiles[0]):
                 focus_measure = 0
-                if function_argument:
+                if function_argument != None:
                     focus_measure = focus_measure_function(
                         tiles[y_index][x_index], function_argument
                     )
@@ -60,20 +68,23 @@ def compute_focus_measures(
                 fm_per_tile[y_index, x_index] = focus_measure
         fm_per_array.insert(i, fm_per_tile)
 
-    output_array = np.empty_like(pad_array(src_arrays[0], np.array(kernel_size)))  # Also add zeros padding
+    output_array = np.empty_like(
+        pad_array(src_arrays[0], np.array(kernel_size))
+    )  # Also add zeros padding
     # Loop through every tile
     for y_tile_index, _ in enumerate(tiles_per_array[0]):
         y_offset = y_tile_index * kernel_size[0]
         for x_tile_index, _ in enumerate(tiles_per_array[0][0]):
-            # Get index of image with best tile (most in focus / highest SF)
-            best_ca_index = 0
+            # Get index of image with best tile (most in focus / highest FM)
+            best_image_index = 0
             for ca_index, tiles in enumerate(tiles_per_array):
-                # Is new image's tile more in focus? (higher SF)
+                # Is new image's tile more in focus? (higher FM)
                 if (
                     fm_per_array[ca_index][y_tile_index][x_tile_index]
-                    > fm_per_array[best_ca_index][y_tile_index][x_tile_index]
+                    > fm_per_array[best_image_index][y_tile_index][x_tile_index]
                 ):
-                    best_ca_index = ca_index
+                    best_image_index = ca_index
+            print(best_image_index)
 
             x_offset = x_tile_index * kernel_size[1]
             if x_offset < 0:
@@ -113,15 +124,16 @@ for v in wavelet_transforms:
 ll = compute_focus_measures(ll, spatial_frequency_kernel_size, spatial_frequency)
 
 lh = compute_focus_measures(
-    lh, spatial_frequency_kernel_size, sum_modified_laplacian, 6
+    lh, sum_modified_laplacian_kernel_size, sum_modified_laplacian, SML_threshold
 )
 hl = compute_focus_measures(
-    hl, spatial_frequency_kernel_size, sum_modified_laplacian, 6
+    hl, sum_modified_laplacian_kernel_size, sum_modified_laplacian, SML_threshold
 )
 hh = compute_focus_measures(
-    hh, spatial_frequency_kernel_size, sum_modified_laplacian, 6
+    hh, sum_modified_laplacian_kernel_size, sum_modified_laplacian, SML_threshold
 )
 
+# ll = np.maximum.reduce(ll)
 # lh = np.mean(lh, axis=0)
 # hl = np.mean(hl, axis=0)
 # hh = np.mean(hh, axis=0)
