@@ -1,9 +1,11 @@
 # type: ignore
 import numpy as np
+import cython
 cimport numpy as np
 from libc.math cimport floor, sqrt, abs, ceil, fmod
 
 # Append zeros to array if not nicely divisible by kernel_size (y, x)
+@cython.cdivision(True)
 def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
     # Must be floats for division later on
     cdef float img_height = array.shape[0]
@@ -31,6 +33,7 @@ def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=
 
 # Split array into smaller blocks (kernel_size)
 # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
+@cython.cdivision(True)
 def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
 
     # Pad array (if neccessary)
@@ -54,6 +57,7 @@ def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.in
     return tiled_array
 
 # Compute spatial frequency of array
+@cython.cdivision(True)
 def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):
     cdef int x, y
     cdef float calc
@@ -84,6 +88,7 @@ def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):
     return sf
 
 # Compute sum-modified-Laplacian (SML) of array
+@cython.cdivision(True)
 def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):
     cdef int step = 1
     cdef int h = array.shape[0] - 1

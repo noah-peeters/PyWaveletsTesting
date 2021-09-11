@@ -638,8 +638,6 @@ static CYTHON_INLINE float __PYX_NAN() {
 
     /* NumPy API declarations from "numpy/__init__.pxd" */
     
-#include <stddef.h>
-#include <time.h>
 #include <math.h>
 #ifdef _OPENMP
 #include <omp.h>
@@ -1413,13 +1411,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 /* BufferFallbackError.proto */
 static void __Pyx_RaiseBufferFallbackError(void);
 
-/* None.proto */
-static CYTHON_INLINE int __Pyx_div_int(int, int);
-
-/* UnaryNegOverflows.proto */
-#define UNARY_NEG_WOULD_OVERFLOW(x)\
-        (((x) < 0) & ((unsigned long)(x) == 0-(unsigned long)(x)))
-
 /* PyObjectCallMethO.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -1665,6 +1656,8 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
+/* Module declarations from 'cython' */
+
 /* Module declarations from 'cpython.buffer' */
 
 /* Module declarations from 'libc.string' */
@@ -1703,13 +1696,7 @@ static PyTypeObject *__pyx_ptype_5numpy_flexible = 0;
 static PyTypeObject *__pyx_ptype_5numpy_character = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 
-/* Module declarations from 'libc.stddef' */
-
-/* Module declarations from 'libc.time' */
-
 /* Module declarations from 'libc.math' */
-
-/* Module declarations from 'cython' */
 
 /* Module declarations from 'algorithms' */
 static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t = { "float32_t", NULL, sizeof(__pyx_t_5numpy_float32_t), { 0 }, 0, 'R', 0, 0 };
@@ -1734,7 +1721,6 @@ static const char __pyx_k_calc[] = "calc";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mode[] = "mode";
 static const char __pyx_k_name[] = "__name__";
-static const char __pyx_k_pywt[] = "pywt";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_array[] = "array";
@@ -1798,7 +1784,6 @@ static PyObject *__pyx_kp_s_numpy_core_multiarray_failed_to;
 static PyObject *__pyx_kp_s_numpy_core_umath_failed_to_impor;
 static PyObject *__pyx_n_s_pad;
 static PyObject *__pyx_n_s_pad_array;
-static PyObject *__pyx_n_s_pywt;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_reshape;
 static PyObject *__pyx_n_s_reshape_split_array;
@@ -1843,9 +1828,9 @@ static PyObject *__pyx_codeobj__9;
 static PyObject *__pyx_codeobj__11;
 /* Late includes */
 
-/* "algorithms.pyx":10
- * 
+/* "algorithms.pyx":9
  * # Append zeros to array if not nicely divisible by kernel_size (y, x)
+ * @cython.cdivision(True)
  * def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]
@@ -1886,11 +1871,11 @@ static PyObject *__pyx_pw_10algorithms_1pad_array(PyObject *__pyx_self, PyObject
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_kernel_size)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("pad_array", 1, 2, 2, 1); __PYX_ERR(0, 10, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("pad_array", 1, 2, 2, 1); __PYX_ERR(0, 9, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pad_array") < 0)) __PYX_ERR(0, 10, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "pad_array") < 0)) __PYX_ERR(0, 9, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1903,14 +1888,14 @@ static PyObject *__pyx_pw_10algorithms_1pad_array(PyObject *__pyx_self, PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("pad_array", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 10, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pad_array", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 9, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("algorithms.pad_array", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 10, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_kernel_size), __pyx_ptype_5numpy_ndarray, 1, "kernel_size", 0))) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_kernel_size), __pyx_ptype_5numpy_ndarray, 1, "kernel_size", 0))) __PYX_ERR(0, 9, __pyx_L1_error)
   __pyx_r = __pyx_pf_10algorithms_pad_array(__pyx_self, __pyx_v_array, __pyx_v_kernel_size);
 
   /* function exit code */
@@ -1959,16 +1944,16 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_pybuffernd_kernel_size.rcbuffer = &__pyx_pybuffer_kernel_size;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 10, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 9, __pyx_L1_error)
   }
   __pyx_pybuffernd_array.diminfo[0].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_array.diminfo[0].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_array.diminfo[1].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_array.diminfo[1].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_kernel_size.rcbuffer->pybuffer, (PyObject*)__pyx_v_kernel_size, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 10, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_kernel_size.rcbuffer->pybuffer, (PyObject*)__pyx_v_kernel_size, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 9, __pyx_L1_error)
   }
   __pyx_pybuffernd_kernel_size.diminfo[0].strides = __pyx_pybuffernd_kernel_size.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_kernel_size.diminfo[0].shape = __pyx_pybuffernd_kernel_size.rcbuffer->pybuffer.shape[0];
 
-  /* "algorithms.pyx":12
+  /* "algorithms.pyx":11
  * def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]             # <<<<<<<<<<<<<<
@@ -1977,7 +1962,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_img_height = (__pyx_v_array->dimensions[0]);
 
-  /* "algorithms.pyx":13
+  /* "algorithms.pyx":12
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]
  *     cdef float img_width = array.shape[1]             # <<<<<<<<<<<<<<
@@ -1986,7 +1971,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_img_width = (__pyx_v_array->dimensions[1]);
 
-  /* "algorithms.pyx":14
+  /* "algorithms.pyx":13
  *     cdef float img_height = array.shape[0]
  *     cdef float img_width = array.shape[1]
  *     cdef float tile_height = kernel_size[0]             # <<<<<<<<<<<<<<
@@ -2001,11 +1986,11 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   } else if (unlikely(__pyx_t_1 >= __pyx_pybuffernd_kernel_size.diminfo[0].shape)) __pyx_t_2 = 0;
   if (unlikely(__pyx_t_2 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_2);
-    __PYX_ERR(0, 14, __pyx_L1_error)
+    __PYX_ERR(0, 13, __pyx_L1_error)
   }
   __pyx_v_tile_height = (*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_kernel_size.rcbuffer->pybuffer.buf, __pyx_t_1, __pyx_pybuffernd_kernel_size.diminfo[0].strides));
 
-  /* "algorithms.pyx":15
+  /* "algorithms.pyx":14
  *     cdef float img_width = array.shape[1]
  *     cdef float tile_height = kernel_size[0]
  *     cdef float tile_width = kernel_size[1]             # <<<<<<<<<<<<<<
@@ -2020,11 +2005,11 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   } else if (unlikely(__pyx_t_1 >= __pyx_pybuffernd_kernel_size.diminfo[0].shape)) __pyx_t_2 = 0;
   if (unlikely(__pyx_t_2 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_2);
-    __PYX_ERR(0, 15, __pyx_L1_error)
+    __PYX_ERR(0, 14, __pyx_L1_error)
   }
   __pyx_v_tile_width = (*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_kernel_size.rcbuffer->pybuffer.buf, __pyx_t_1, __pyx_pybuffernd_kernel_size.diminfo[0].strides));
 
-  /* "algorithms.pyx":17
+  /* "algorithms.pyx":16
  *     cdef float tile_width = kernel_size[1]
  * 
  *     cdef double y_padding_width = 0             # <<<<<<<<<<<<<<
@@ -2033,7 +2018,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_y_padding_width = 0.0;
 
-  /* "algorithms.pyx":18
+  /* "algorithms.pyx":17
  * 
  *     cdef double y_padding_width = 0
  *     cdef double x_padding_width = 0             # <<<<<<<<<<<<<<
@@ -2042,7 +2027,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_x_padding_width = 0.0;
 
-  /* "algorithms.pyx":21
+  /* "algorithms.pyx":20
  *     cdef float intercalc
  * 
  *     cdef double y_remainder = fmod(img_height, tile_height)             # <<<<<<<<<<<<<<
@@ -2051,7 +2036,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_y_remainder = fmod(__pyx_v_img_height, __pyx_v_tile_height);
 
-  /* "algorithms.pyx":22
+  /* "algorithms.pyx":21
  * 
  *     cdef double y_remainder = fmod(img_height, tile_height)
  *     if y_remainder != 0:             # <<<<<<<<<<<<<<
@@ -2061,20 +2046,16 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_3 = ((__pyx_v_y_remainder != 0.0) != 0);
   if (__pyx_t_3) {
 
-    /* "algorithms.pyx":24
+    /* "algorithms.pyx":23
  *     if y_remainder != 0:
  *         # Add padding on y-axis (equally on both sides)
  *         intercalc = ceil(img_height / tile_height)             # <<<<<<<<<<<<<<
  *         y_padding_width = (intercalc * tile_height) - img_height
  *     cdef double x_remainder = fmod(img_width, tile_width)
  */
-    if (unlikely(__pyx_v_tile_height == 0)) {
-      PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 24, __pyx_L1_error)
-    }
     __pyx_v_intercalc = ceil((__pyx_v_img_height / __pyx_v_tile_height));
 
-    /* "algorithms.pyx":25
+    /* "algorithms.pyx":24
  *         # Add padding on y-axis (equally on both sides)
  *         intercalc = ceil(img_height / tile_height)
  *         y_padding_width = (intercalc * tile_height) - img_height             # <<<<<<<<<<<<<<
@@ -2083,7 +2064,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
     __pyx_v_y_padding_width = ((__pyx_v_intercalc * __pyx_v_tile_height) - __pyx_v_img_height);
 
-    /* "algorithms.pyx":22
+    /* "algorithms.pyx":21
  * 
  *     cdef double y_remainder = fmod(img_height, tile_height)
  *     if y_remainder != 0:             # <<<<<<<<<<<<<<
@@ -2092,7 +2073,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   }
 
-  /* "algorithms.pyx":26
+  /* "algorithms.pyx":25
  *         intercalc = ceil(img_height / tile_height)
  *         y_padding_width = (intercalc * tile_height) - img_height
  *     cdef double x_remainder = fmod(img_width, tile_width)             # <<<<<<<<<<<<<<
@@ -2101,7 +2082,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_x_remainder = fmod(__pyx_v_img_width, __pyx_v_tile_width);
 
-  /* "algorithms.pyx":27
+  /* "algorithms.pyx":26
  *         y_padding_width = (intercalc * tile_height) - img_height
  *     cdef double x_remainder = fmod(img_width, tile_width)
  *     if x_remainder != 0:             # <<<<<<<<<<<<<<
@@ -2111,20 +2092,16 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_3 = ((__pyx_v_x_remainder != 0.0) != 0);
   if (__pyx_t_3) {
 
-    /* "algorithms.pyx":29
+    /* "algorithms.pyx":28
  *     if x_remainder != 0:
  *         # Add padding on x-axis (equally on both sides)
  *         intercalc = ceil(img_width / tile_width)             # <<<<<<<<<<<<<<
  *         x_padding_width = (intercalc * tile_width) - img_width
  * 
  */
-    if (unlikely(__pyx_v_tile_width == 0)) {
-      PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 29, __pyx_L1_error)
-    }
     __pyx_v_intercalc = ceil((__pyx_v_img_width / __pyx_v_tile_width));
 
-    /* "algorithms.pyx":30
+    /* "algorithms.pyx":29
  *         # Add padding on x-axis (equally on both sides)
  *         intercalc = ceil(img_width / tile_width)
  *         x_padding_width = (intercalc * tile_width) - img_width             # <<<<<<<<<<<<<<
@@ -2133,7 +2110,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
     __pyx_v_x_padding_width = ((__pyx_v_intercalc * __pyx_v_tile_width) - __pyx_v_img_width);
 
-    /* "algorithms.pyx":27
+    /* "algorithms.pyx":26
  *         y_padding_width = (intercalc * tile_height) - img_height
  *     cdef double x_remainder = fmod(img_width, tile_width)
  *     if x_remainder != 0:             # <<<<<<<<<<<<<<
@@ -2142,7 +2119,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  */
   }
 
-  /* "algorithms.pyx":33
+  /* "algorithms.pyx":32
  * 
  *     # Pad array (if neccessary)
  *     return np.pad(array, [(0, int(y_padding_width)), (0, int(x_padding_width))], mode="constant", constant_values=0)             # <<<<<<<<<<<<<<
@@ -2150,14 +2127,14 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
  * # Split array into smaller blocks (kernel_size)
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_pad); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_pad); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromDouble(__pyx_v_y_padding_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromDouble(__pyx_v_y_padding_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -2165,9 +2142,9 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromDouble(__pyx_v_x_padding_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromDouble(__pyx_v_x_padding_width); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_int_0);
   __Pyx_GIVEREF(__pyx_int_0);
@@ -2175,7 +2152,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_6);
   PyList_SET_ITEM(__pyx_t_4, 0, __pyx_t_6);
@@ -2183,7 +2160,7 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   PyList_SET_ITEM(__pyx_t_4, 1, __pyx_t_7);
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(((PyObject *)__pyx_v_array));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_array));
@@ -2191,11 +2168,11 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_mode, __pyx_n_s_constant) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_constant_values, __pyx_int_0) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_mode, __pyx_n_s_constant) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_constant_values, __pyx_int_0) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -2204,9 +2181,9 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "algorithms.pyx":10
- * 
+  /* "algorithms.pyx":9
  * # Append zeros to array if not nicely divisible by kernel_size (y, x)
+ * @cython.cdivision(True)
  * def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]
@@ -2238,8 +2215,8 @@ static PyObject *__pyx_pf_10algorithms_pad_array(CYTHON_UNUSED PyObject *__pyx_s
 }
 
 /* "algorithms.pyx":37
- * # Split array into smaller blocks (kernel_size)
  * # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
+ * @cython.cdivision(True)
  * def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  * 
  *     # Pad array (if neccessary)
@@ -2515,15 +2492,7 @@ static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObje
  *             int(tile_height),
  *             int(floor(img_width / tile_width)),
  */
-  if (unlikely(__pyx_v_tile_height == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-    __PYX_ERR(0, 50, __pyx_L1_error)
-  }
-  else if (sizeof(int) == sizeof(long) && (!(((int)-1) > 0)) && unlikely(__pyx_v_tile_height == (int)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(__pyx_v_img_height))) {
-    PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
-    __PYX_ERR(0, 50, __pyx_L1_error)
-  }
-  __pyx_t_5 = __Pyx_PyInt_FromDouble(floor(__Pyx_div_int(__pyx_v_img_height, __pyx_v_tile_height))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromDouble(floor((__pyx_v_img_height / __pyx_v_tile_height))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
   /* "algorithms.pyx":51
@@ -2546,15 +2515,7 @@ static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObje
  *             int(tile_width),
  *         )
  */
-  if (unlikely(__pyx_v_tile_width == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-    __PYX_ERR(0, 52, __pyx_L1_error)
-  }
-  else if (sizeof(int) == sizeof(long) && (!(((int)-1) > 0)) && unlikely(__pyx_v_tile_width == (int)-1)  && unlikely(UNARY_NEG_WOULD_OVERFLOW(__pyx_v_img_width))) {
-    PyErr_SetString(PyExc_OverflowError, "value too large to perform division");
-    __PYX_ERR(0, 52, __pyx_L1_error)
-  }
-  __pyx_t_3 = __Pyx_PyInt_FromDouble(floor(__Pyx_div_int(__pyx_v_img_width, __pyx_v_tile_width))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromDouble(floor((__pyx_v_img_width / __pyx_v_tile_width))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "algorithms.pyx":53
@@ -2648,8 +2609,8 @@ static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObje
   goto __pyx_L0;
 
   /* "algorithms.pyx":37
- * # Split array into smaller blocks (kernel_size)
  * # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
+ * @cython.cdivision(True)
  * def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  * 
  *     # Pad array (if neccessary)
@@ -2685,9 +2646,9 @@ static PyObject *__pyx_pf_10algorithms_2reshape_split_array(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "algorithms.pyx":60
- * 
+/* "algorithms.pyx":61
  * # Compute spatial frequency of array
+ * @cython.cdivision(True)
  * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
@@ -2703,7 +2664,7 @@ static PyObject *__pyx_pw_10algorithms_5spatial_frequency(PyObject *__pyx_self, 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("spatial_frequency (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_r = __pyx_pf_10algorithms_4spatial_frequency(__pyx_self, ((PyArrayObject *)__pyx_v_array));
 
   /* function exit code */
@@ -2740,8 +2701,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   int __pyx_t_9;
   Py_ssize_t __pyx_t_10;
   Py_ssize_t __pyx_t_11;
-  float __pyx_t_12;
-  PyObject *__pyx_t_13 = NULL;
+  PyObject *__pyx_t_12 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2752,11 +2712,11 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   __pyx_pybuffernd_array.rcbuffer = &__pyx_pybuffer_array;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 60, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 61, __pyx_L1_error)
   }
   __pyx_pybuffernd_array.diminfo[0].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_array.diminfo[0].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_array.diminfo[1].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_array.diminfo[1].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[1];
 
-  /* "algorithms.pyx":64
+  /* "algorithms.pyx":65
  *     cdef float calc
  * 
  *     cdef float row_frequency = 0             # <<<<<<<<<<<<<<
@@ -2765,7 +2725,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_row_frequency = 0.0;
 
-  /* "algorithms.pyx":65
+  /* "algorithms.pyx":66
  * 
  *     cdef float row_frequency = 0
  *     cdef float column_frequency = 0             # <<<<<<<<<<<<<<
@@ -2774,7 +2734,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_column_frequency = 0.0;
 
-  /* "algorithms.pyx":67
+  /* "algorithms.pyx":68
  *     cdef float column_frequency = 0
  *     # Floats for calculation
  *     cdef float h = array.shape[0]             # <<<<<<<<<<<<<<
@@ -2783,7 +2743,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_h = (__pyx_v_array->dimensions[0]);
 
-  /* "algorithms.pyx":68
+  /* "algorithms.pyx":69
  *     # Floats for calculation
  *     cdef float h = array.shape[0]
  *     cdef float w = array.shape[1]             # <<<<<<<<<<<<<<
@@ -2792,7 +2752,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_w = (__pyx_v_array->dimensions[1]);
 
-  /* "algorithms.pyx":71
+  /* "algorithms.pyx":72
  * 
  *     # Row frequency
  *     for y in range(0, int(h)):             # <<<<<<<<<<<<<<
@@ -2804,7 +2764,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_y = __pyx_t_3;
 
-    /* "algorithms.pyx":72
+    /* "algorithms.pyx":73
  *     # Row frequency
  *     for y in range(0, int(h)):
  *         for x in range(1, int(w)):  # Start one further             # <<<<<<<<<<<<<<
@@ -2816,7 +2776,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_x = __pyx_t_6;
 
-      /* "algorithms.pyx":73
+      /* "algorithms.pyx":74
  *     for y in range(0, int(h)):
  *         for x in range(1, int(w)):  # Start one further
  *             calc = (array[y, x] - array[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
@@ -2836,7 +2796,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 73, __pyx_L1_error)
+        __PYX_ERR(0, 74, __pyx_L1_error)
       }
       __pyx_t_10 = (__pyx_v_y - 1);
       __pyx_t_11 = __pyx_v_x;
@@ -2851,11 +2811,11 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 73, __pyx_L1_error)
+        __PYX_ERR(0, 74, __pyx_L1_error)
       }
       __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_array.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_array.diminfo[1].strides))), 2.0);
 
-      /* "algorithms.pyx":74
+      /* "algorithms.pyx":75
  *         for x in range(1, int(w)):  # Start one further
  *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             row_frequency += calc             # <<<<<<<<<<<<<<
@@ -2866,7 +2826,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
     }
   }
 
-  /* "algorithms.pyx":76
+  /* "algorithms.pyx":77
  *             row_frequency += calc
  *     # Column frequency
  *     for x in range(0, int(w)):  # Start one further             # <<<<<<<<<<<<<<
@@ -2878,7 +2838,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_x = __pyx_t_3;
 
-    /* "algorithms.pyx":77
+    /* "algorithms.pyx":78
  *     # Column frequency
  *     for x in range(0, int(w)):  # Start one further
  *         for y in range(1, int(h)):             # <<<<<<<<<<<<<<
@@ -2890,7 +2850,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_y = __pyx_t_6;
 
-      /* "algorithms.pyx":78
+      /* "algorithms.pyx":79
  *     for x in range(0, int(w)):  # Start one further
  *         for y in range(1, int(h)):
  *             calc = (array[y, x] - array[y - 1, x]) ** 2             # <<<<<<<<<<<<<<
@@ -2910,7 +2870,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 78, __pyx_L1_error)
+        __PYX_ERR(0, 79, __pyx_L1_error)
       }
       __pyx_t_8 = (__pyx_v_y - 1);
       __pyx_t_7 = __pyx_v_x;
@@ -2925,11 +2885,11 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
       } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 78, __pyx_L1_error)
+        __PYX_ERR(0, 79, __pyx_L1_error)
       }
       __pyx_v_calc = powf(((*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_array.diminfo[1].strides)) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_array.diminfo[1].strides))), 2.0);
 
-      /* "algorithms.pyx":79
+      /* "algorithms.pyx":80
  *         for y in range(1, int(h)):
  *             calc = (array[y, x] - array[y - 1, x]) ** 2
  *             column_frequency += calc             # <<<<<<<<<<<<<<
@@ -2940,21 +2900,16 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
     }
   }
 
-  /* "algorithms.pyx":81
+  /* "algorithms.pyx":82
  *             column_frequency += calc
  * 
  *     cdef float mXn = 1 / (h * w)             # <<<<<<<<<<<<<<
  *     row_frequency = sqrt(mXn * row_frequency)
  *     column_frequency = sqrt(mXn * column_frequency)
  */
-  __pyx_t_12 = (__pyx_v_h * __pyx_v_w);
-  if (unlikely(__pyx_t_12 == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 81, __pyx_L1_error)
-  }
-  __pyx_v_mXn = (1.0 / __pyx_t_12);
+  __pyx_v_mXn = (1.0 / (__pyx_v_h * __pyx_v_w));
 
-  /* "algorithms.pyx":82
+  /* "algorithms.pyx":83
  * 
  *     cdef float mXn = 1 / (h * w)
  *     row_frequency = sqrt(mXn * row_frequency)             # <<<<<<<<<<<<<<
@@ -2963,7 +2918,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_row_frequency = sqrt((__pyx_v_mXn * __pyx_v_row_frequency));
 
-  /* "algorithms.pyx":83
+  /* "algorithms.pyx":84
  *     cdef float mXn = 1 / (h * w)
  *     row_frequency = sqrt(mXn * row_frequency)
  *     column_frequency = sqrt(mXn * column_frequency)             # <<<<<<<<<<<<<<
@@ -2972,7 +2927,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_column_frequency = sqrt((__pyx_v_mXn * __pyx_v_column_frequency));
 
-  /* "algorithms.pyx":86
+  /* "algorithms.pyx":87
  * 
  *     # Spatial frequency of array
  *     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))             # <<<<<<<<<<<<<<
@@ -2981,7 +2936,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  */
   __pyx_v_sf = sqrt((powf(__pyx_v_column_frequency, 2.0) + powf(__pyx_v_row_frequency, 2.0)));
 
-  /* "algorithms.pyx":87
+  /* "algorithms.pyx":88
  *     # Spatial frequency of array
  *     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))
  *     return sf             # <<<<<<<<<<<<<<
@@ -2989,15 +2944,15 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
  * # Compute sum-modified-Laplacian (SML) of array
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_13 = PyFloat_FromDouble(__pyx_v_sf); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_13);
-  __pyx_r = __pyx_t_13;
-  __pyx_t_13 = 0;
+  __pyx_t_12 = PyFloat_FromDouble(__pyx_v_sf); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_r = __pyx_t_12;
+  __pyx_t_12 = 0;
   goto __pyx_L0;
 
-  /* "algorithms.pyx":60
- * 
+  /* "algorithms.pyx":61
  * # Compute spatial frequency of array
+ * @cython.cdivision(True)
  * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
@@ -3005,7 +2960,7 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_13);
+  __Pyx_XDECREF(__pyx_t_12);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
@@ -3023,9 +2978,9 @@ static PyObject *__pyx_pf_10algorithms_4spatial_frequency(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "algorithms.pyx":90
- * 
+/* "algorithms.pyx":92
  * # Compute sum-modified-Laplacian (SML) of array
+ * @cython.cdivision(True)
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):             # <<<<<<<<<<<<<<
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1
@@ -3066,11 +3021,11 @@ static PyObject *__pyx_pw_10algorithms_7sum_modified_laplacian(PyObject *__pyx_s
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_threshhold)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sum_modified_laplacian", 1, 2, 2, 1); __PYX_ERR(0, 90, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sum_modified_laplacian", 1, 2, 2, 1); __PYX_ERR(0, 92, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sum_modified_laplacian") < 0)) __PYX_ERR(0, 90, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sum_modified_laplacian") < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3079,17 +3034,17 @@ static PyObject *__pyx_pw_10algorithms_7sum_modified_laplacian(PyObject *__pyx_s
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_array = ((PyArrayObject *)values[0]);
-    __pyx_v_threshhold = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_threshhold == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L3_error)
+    __pyx_v_threshhold = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_threshhold == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sum_modified_laplacian", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 90, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sum_modified_laplacian", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 92, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("algorithms.sum_modified_laplacian", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_array), __pyx_ptype_5numpy_ndarray, 1, "array", 0))) __PYX_ERR(0, 92, __pyx_L1_error)
   __pyx_r = __pyx_pf_10algorithms_6sum_modified_laplacian(__pyx_self, __pyx_v_array, __pyx_v_threshhold);
 
   /* function exit code */
@@ -3140,12 +3095,12 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
   __pyx_pybuffernd_array.rcbuffer = &__pyx_pybuffer_array;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_array.rcbuffer->pybuffer, (PyObject*)__pyx_v_array, &__Pyx_TypeInfo_nn___pyx_t_5numpy_float32_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 92, __pyx_L1_error)
   }
   __pyx_pybuffernd_array.diminfo[0].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_array.diminfo[0].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_array.diminfo[1].strides = __pyx_pybuffernd_array.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_array.diminfo[1].shape = __pyx_pybuffernd_array.rcbuffer->pybuffer.shape[1];
 
-  /* "algorithms.pyx":91
- * # Compute sum-modified-Laplacian (SML) of array
+  /* "algorithms.pyx":93
+ * @cython.cdivision(True)
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):
  *     cdef int step = 1             # <<<<<<<<<<<<<<
  *     cdef int h = array.shape[0] - 1
@@ -3153,7 +3108,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
   __pyx_v_step = 1;
 
-  /* "algorithms.pyx":92
+  /* "algorithms.pyx":94
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1             # <<<<<<<<<<<<<<
@@ -3162,7 +3117,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
   __pyx_v_h = ((__pyx_v_array->dimensions[0]) - 1);
 
-  /* "algorithms.pyx":93
+  /* "algorithms.pyx":95
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1
  *     cdef int w = array.shape[1] - 1             # <<<<<<<<<<<<<<
@@ -3171,7 +3126,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
   __pyx_v_w = ((__pyx_v_array->dimensions[1]) - 1);
 
-  /* "algorithms.pyx":95
+  /* "algorithms.pyx":97
  *     cdef int w = array.shape[1] - 1
  * 
  *     cdef float sum = 0             # <<<<<<<<<<<<<<
@@ -3180,7 +3135,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
   __pyx_v_sum = 0.0;
 
-  /* "algorithms.pyx":99
+  /* "algorithms.pyx":101
  *     cdef int x, y
  * 
  *     for y in range(1, h):             # <<<<<<<<<<<<<<
@@ -3192,7 +3147,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
   for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_y = __pyx_t_3;
 
-    /* "algorithms.pyx":100
+    /* "algorithms.pyx":102
  * 
  *     for y in range(1, h):
  *         for x in range(0, w):             # <<<<<<<<<<<<<<
@@ -3204,7 +3159,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_x = __pyx_t_6;
 
-      /* "algorithms.pyx":101
+      /* "algorithms.pyx":103
  *     for y in range(1, h):
  *         for x in range(0, w):
  *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])             # <<<<<<<<<<<<<<
@@ -3224,7 +3179,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_8 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 101, __pyx_L1_error)
+        __PYX_ERR(0, 103, __pyx_L1_error)
       }
       __pyx_t_10 = __pyx_v_y;
       __pyx_t_11 = (__pyx_v_x - __pyx_v_step);
@@ -3239,7 +3194,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_11 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 101, __pyx_L1_error)
+        __PYX_ERR(0, 103, __pyx_L1_error)
       }
       __pyx_t_12 = __pyx_v_y;
       __pyx_t_13 = (__pyx_v_x + __pyx_v_step);
@@ -3254,11 +3209,11 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_13 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 101, __pyx_L1_error)
+        __PYX_ERR(0, 103, __pyx_L1_error)
       }
       __pyx_v_x_step = fabsf((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_array.diminfo[1].strides))));
 
-      /* "algorithms.pyx":102
+      /* "algorithms.pyx":104
  *         for x in range(0, w):
  *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
  *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])             # <<<<<<<<<<<<<<
@@ -3278,7 +3233,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_12 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 102, __pyx_L1_error)
+        __PYX_ERR(0, 104, __pyx_L1_error)
       }
       __pyx_t_11 = (__pyx_v_y - __pyx_v_step);
       __pyx_t_10 = __pyx_v_x;
@@ -3293,7 +3248,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_10 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 102, __pyx_L1_error)
+        __PYX_ERR(0, 104, __pyx_L1_error)
       }
       __pyx_t_8 = (__pyx_v_y + __pyx_v_step);
       __pyx_t_7 = __pyx_v_x;
@@ -3308,11 +3263,11 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_array.diminfo[1].shape)) __pyx_t_9 = 1;
       if (unlikely(__pyx_t_9 != -1)) {
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
-        __PYX_ERR(0, 102, __pyx_L1_error)
+        __PYX_ERR(0, 104, __pyx_L1_error)
       }
       __pyx_v_y_step = fabsf((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_13, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_12, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_array.diminfo[1].strides))));
 
-      /* "algorithms.pyx":103
+      /* "algorithms.pyx":105
  *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
  *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step             # <<<<<<<<<<<<<<
@@ -3321,7 +3276,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
       __pyx_v_delta = (__pyx_v_x_step + __pyx_v_y_step);
 
-      /* "algorithms.pyx":104
+      /* "algorithms.pyx":106
  *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step
  *             if delta >= threshhold:             # <<<<<<<<<<<<<<
@@ -3331,7 +3286,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       __pyx_t_14 = ((__pyx_v_delta >= __pyx_v_threshhold) != 0);
       if (__pyx_t_14) {
 
-        /* "algorithms.pyx":105
+        /* "algorithms.pyx":107
  *             delta = x_step + y_step
  *             if delta >= threshhold:
  *                 sum += delta             # <<<<<<<<<<<<<<
@@ -3339,7 +3294,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  */
         __pyx_v_sum = (__pyx_v_sum + __pyx_v_delta);
 
-        /* "algorithms.pyx":104
+        /* "algorithms.pyx":106
  *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step
  *             if delta >= threshhold:             # <<<<<<<<<<<<<<
@@ -3350,21 +3305,21 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
     }
   }
 
-  /* "algorithms.pyx":106
+  /* "algorithms.pyx":108
  *             if delta >= threshhold:
  *                 sum += delta
  *     return sum             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_15 = PyFloat_FromDouble(__pyx_v_sum); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_15 = PyFloat_FromDouble(__pyx_v_sum); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
   __pyx_r = __pyx_t_15;
   __pyx_t_15 = 0;
   goto __pyx_L0;
 
-  /* "algorithms.pyx":90
- * 
+  /* "algorithms.pyx":92
  * # Compute sum-modified-Laplacian (SML) of array
+ * @cython.cdivision(True)
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):             # <<<<<<<<<<<<<<
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1
@@ -4479,7 +4434,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 0, 1, 0},
   {&__pyx_n_s_pad, __pyx_k_pad, sizeof(__pyx_k_pad), 0, 0, 1, 1},
   {&__pyx_n_s_pad_array, __pyx_k_pad_array, sizeof(__pyx_k_pad_array), 0, 0, 1, 1},
-  {&__pyx_n_s_pywt, __pyx_k_pywt, sizeof(__pyx_k_pywt), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_reshape, __pyx_k_reshape, sizeof(__pyx_k_reshape), 0, 0, 1, 1},
   {&__pyx_n_s_reshape_split_array, __pyx_k_reshape_split_array, sizeof(__pyx_k_reshape_split_array), 0, 0, 1, 1},
@@ -4507,7 +4461,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 945, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -4551,21 +4505,21 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "algorithms.pyx":10
- * 
+  /* "algorithms.pyx":9
  * # Append zeros to array if not nicely divisible by kernel_size (y, x)
+ * @cython.cdivision(True)
  * def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]
  */
-  __pyx_tuple__4 = PyTuple_Pack(11, __pyx_n_s_array, __pyx_n_s_kernel_size, __pyx_n_s_img_height, __pyx_n_s_img_width, __pyx_n_s_tile_height, __pyx_n_s_tile_width, __pyx_n_s_y_padding_width, __pyx_n_s_x_padding_width, __pyx_n_s_intercalc, __pyx_n_s_y_remainder, __pyx_n_s_x_remainder); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(11, __pyx_n_s_array, __pyx_n_s_kernel_size, __pyx_n_s_img_height, __pyx_n_s_img_width, __pyx_n_s_tile_height, __pyx_n_s_tile_width, __pyx_n_s_y_padding_width, __pyx_n_s_x_padding_width, __pyx_n_s_intercalc, __pyx_n_s_y_remainder, __pyx_n_s_x_remainder); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_pad_array, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_pad_array, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 9, __pyx_L1_error)
 
   /* "algorithms.pyx":37
- * # Split array into smaller blocks (kernel_size)
  * # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
+ * @cython.cdivision(True)
  * def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  * 
  *     # Pad array (if neccessary)
@@ -4575,29 +4529,29 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__6);
   __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_reshape_split_array, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 37, __pyx_L1_error)
 
-  /* "algorithms.pyx":60
- * 
+  /* "algorithms.pyx":61
  * # Compute spatial frequency of array
+ * @cython.cdivision(True)
  * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
-  __pyx_tuple__8 = PyTuple_Pack(10, __pyx_n_s_array, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_calc, __pyx_n_s_row_frequency, __pyx_n_s_column_frequency, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_mXn, __pyx_n_s_sf); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(10, __pyx_n_s_array, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_calc, __pyx_n_s_row_frequency, __pyx_n_s_column_frequency, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_mXn, __pyx_n_s_sf); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_spatial_frequency, 60, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_spatial_frequency, 61, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 61, __pyx_L1_error)
 
-  /* "algorithms.pyx":90
- * 
+  /* "algorithms.pyx":92
  * # Compute sum-modified-Laplacian (SML) of array
+ * @cython.cdivision(True)
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):             # <<<<<<<<<<<<<<
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1
  */
-  __pyx_tuple__10 = PyTuple_Pack(11, __pyx_n_s_array, __pyx_n_s_threshhold, __pyx_n_s_step, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_sum, __pyx_n_s_x_step, __pyx_n_s_y_step, __pyx_n_s_delta, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(11, __pyx_n_s_array, __pyx_n_s_threshhold, __pyx_n_s_step, __pyx_n_s_h, __pyx_n_s_w, __pyx_n_s_sum, __pyx_n_s_x_step, __pyx_n_s_y_step, __pyx_n_s_delta, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_sum_modified_laplacian, 90, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_algorithms_pyx, __pyx_n_s_sum_modified_laplacian, 92, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4934,41 +4888,29 @@ if (!__Pyx_RefNanny) {
   /* "algorithms.pyx":2
  * # type: ignore
  * import numpy as np             # <<<<<<<<<<<<<<
+ * import cython
  * cimport numpy as np
- * from libc.time cimport time, time_t
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algorithms.pyx":7
- * from libc.math cimport floor, sqrt, abs, ceil, fmod
- * cimport cython
- * import pywt             # <<<<<<<<<<<<<<
- * 
+  /* "algorithms.pyx":9
  * # Append zeros to array if not nicely divisible by kernel_size (y, x)
- */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_pywt, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pywt, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "algorithms.pyx":10
- * 
- * # Append zeros to array if not nicely divisible by kernel_size (y, x)
+ * @cython.cdivision(True)
  * def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  *     # Must be floats for division later on
  *     cdef float img_height = array.shape[0]
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_1pad_array, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_1pad_array, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pad_array, __pyx_t_1) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pad_array, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "algorithms.pyx":37
- * # Split array into smaller blocks (kernel_size)
  * # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
+ * @cython.cdivision(True)
  * def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):             # <<<<<<<<<<<<<<
  * 
  *     # Pad array (if neccessary)
@@ -4978,34 +4920,34 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_reshape_split_array, __pyx_t_1) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algorithms.pyx":60
- * 
+  /* "algorithms.pyx":61
  * # Compute spatial frequency of array
+ * @cython.cdivision(True)
  * def spatial_frequency(np.ndarray[np.float32_t, ndim=2] array):             # <<<<<<<<<<<<<<
  *     cdef int x, y
  *     cdef float calc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_5spatial_frequency, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_5spatial_frequency, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_spatial_frequency, __pyx_t_1) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_spatial_frequency, __pyx_t_1) < 0) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "algorithms.pyx":90
- * 
+  /* "algorithms.pyx":92
  * # Compute sum-modified-Laplacian (SML) of array
+ * @cython.cdivision(True)
  * def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):             # <<<<<<<<<<<<<<
  *     cdef int step = 1
  *     cdef int h = array.shape[0] - 1
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_7sum_modified_laplacian, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10algorithms_7sum_modified_laplacian, NULL, __pyx_n_s_algorithms); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_modified_laplacian, __pyx_t_1) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_modified_laplacian, __pyx_t_1) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "algorithms.pyx":1
  * # type: ignore             # <<<<<<<<<<<<<<
  * import numpy as np
- * cimport numpy as np
+ * import cython
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6093,14 +6035,6 @@ static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, P
   static void __Pyx_RaiseBufferFallbackError(void) {
   PyErr_SetString(PyExc_ValueError,
      "Buffer acquisition failed on assignment; and then reacquiring the old buffer failed too!");
-}
-
-/* None */
-  static CYTHON_INLINE int __Pyx_div_int(int a, int b) {
-    int q = a / b;
-    int r = a - q*b;
-    q -= ((r != 0) & ((r ^ b) < 0));
-    return q;
 }
 
 /* PyObjectCallMethO */
