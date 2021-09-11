@@ -4,17 +4,7 @@ cimport numpy as np
 from libc.time cimport time, time_t
 from libc.math cimport floor, sqrt, abs, ceil, fmod
 cimport cython
-from libc.stdio cimport printf
-from posix.time cimport clock_gettime, timespec, CLOCK_REALTIME
 import pywt
-
-# Get accurate time
-cdef get_time():
-    cdef timespec ts
-    cdef double current
-    clock_gettime(CLOCK_REALTIME, &ts)
-    current = ts.tv_sec + (ts.tv_nsec / 1000000000.)
-    return current
 
 # Append zeros to array if not nicely divisible by kernel_size (y, x)
 def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
@@ -45,7 +35,6 @@ def pad_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=
 # Split array into smaller blocks (kernel_size)
 # Source: https://towardsdatascience.com/efficiently-splitting-an-image-into-tiles-in-python-using-numpy-d1bf0dd7b6f7
 def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.int_t, ndim=1] kernel_size):
-    cdef double start_time = get_time()
 
     # Pad array (if neccessary)
     array = pad_array(array, kernel_size)
@@ -65,15 +54,10 @@ def reshape_split_array(np.ndarray[np.float32_t, ndim=2] array, np.ndarray[np.in
         )
     )
     tiled_array = tiled_array.swapaxes(1, 2)
-
-    cdef double end_time = get_time()
-    printf("Array reshaping computation took: %f seconds.\n", (end_time - start_time))
     return tiled_array
 
 # Compute spatial frequency of array
 def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):
-    cdef double start_time = get_time()
-
     cdef int x, y
     cdef float calc
 
@@ -100,15 +84,10 @@ def spatial_frequency(np.ndarray[np.float32_t, ndim=2] ca):
 
     # Spatial frequency of "ca"
     cdef float sf = sqrt((column_frequency ** 2) + (row_frequency ** 2))
-
-    cdef double end_time = get_time()
-    printf("Spatial frequency computation took: %f seconds.\n", (end_time - start_time))
     return sf
 
 # Compute sum-modified-Laplacian (SML) of array
 def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhold):
-    cdef double start_time = get_time()
-
     cdef int step = 1
     cdef int h = array.shape[0] - 1
     cdef int w = array.shape[1] - 1
@@ -124,8 +103,4 @@ def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhol
             delta = x_step + y_step
             if delta >= threshhold:
                 sum += delta
-    
-    cdef double end_time = get_time()
-    printf("Sum-modified-Laplacian computation took: %f seconds.\n", (end_time - start_time))
-
     return sum
