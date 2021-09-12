@@ -8,8 +8,11 @@ from time import time
 input_folder = "test_images/input/"
 output_folder = "test_images/output/"
 wavelet_to_use = "db4"
-spatial_frequency_kernel_size = (8, 8)  # Spatial frequency block size in pixels
-SML_threshold = 2
+spatial_frequency_kernel_size = (
+    32,
+    64,
+)  # Spatial frequency block size in pixels (y, x)
+SML_threshold = 10
 
 from algorithms import (
     spatial_frequency,
@@ -154,13 +157,9 @@ hh = compute_focus_measures(
 )
 
 # ll = np.maximum.reduce(ll)
-# lh = np.mean(lh, axis=0)
-# hl = np.mean(hl, axis=0)
-# hh = np.mean(hh, axis=0)
-# Highest absolute value for high freq.
-# lh = np.maximum.reduce(lh)
-# hl = np.maximum.reduce(hl)
-# hh = np.maximum.reduce(hh)
+# lh = pad_array(np.mean(lh, axis=0), np.array(spatial_frequency_kernel_size))
+# hl = pad_array(np.mean(hl, axis=0), np.array(spatial_frequency_kernel_size))
+# hh = pad_array(np.mean(hh, axis=0), np.array(spatial_frequency_kernel_size))
 
 # IDWT and write output image
 output_image = pywt.idwt2((ll, (lh, hl, hh)), wavelet_to_use)
