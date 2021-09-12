@@ -2,7 +2,7 @@
 import numpy as np
 import cython
 cimport numpy as np
-from libc.math cimport floor, sqrt, abs, ceil, fmod
+from libc.math cimport floor, sqrt, fabs, ceil, fmod
 
 # Append zeros to array if not nicely divisible by kernel_size (y, x)
 @cython.cdivision(True)
@@ -100,8 +100,8 @@ def sum_modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int threshhol
 
     for y in range(1, h):
         for x in range(0, w):
-            x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
-            y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+            x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+            y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
             delta = x_step + y_step
             if delta >= threshhold:
                 sum += delta

@@ -3140,7 +3140,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  * 
  *     for y in range(1, h):             # <<<<<<<<<<<<<<
  *         for x in range(0, w):
- *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+ *             x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
  */
   __pyx_t_1 = __pyx_v_h;
   __pyx_t_2 = __pyx_t_1;
@@ -3151,8 +3151,8 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
  * 
  *     for y in range(1, h):
  *         for x in range(0, w):             # <<<<<<<<<<<<<<
- *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+ *             x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  */
     __pyx_t_4 = __pyx_v_w;
     __pyx_t_5 = __pyx_t_4;
@@ -3162,8 +3162,8 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       /* "algorithms.pyx":103
  *     for y in range(1, h):
  *         for x in range(0, w):
- *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])             # <<<<<<<<<<<<<<
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+ *             x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])             # <<<<<<<<<<<<<<
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step
  */
       __pyx_t_7 = __pyx_v_y;
@@ -3211,12 +3211,12 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 103, __pyx_L1_error)
       }
-      __pyx_v_x_step = fabsf((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_array.diminfo[1].strides))));
+      __pyx_v_x_step = fabs((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_8, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_10, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_11, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_12, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_13, __pyx_pybuffernd_array.diminfo[1].strides))));
 
       /* "algorithms.pyx":104
  *         for x in range(0, w):
- *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])             # <<<<<<<<<<<<<<
+ *             x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])             # <<<<<<<<<<<<<<
  *             delta = x_step + y_step
  *             if delta >= threshhold:
  */
@@ -3265,11 +3265,11 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
         __Pyx_RaiseBufferIndexError(__pyx_t_9);
         __PYX_ERR(0, 104, __pyx_L1_error)
       }
-      __pyx_v_y_step = fabsf((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_13, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_12, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_array.diminfo[1].strides))));
+      __pyx_v_y_step = fabs((((2.0 * (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_13, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_12, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_11, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_10, __pyx_pybuffernd_array.diminfo[1].strides))) - (*__Pyx_BufPtrStrided2d(__pyx_t_5numpy_float32_t *, __pyx_pybuffernd_array.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_array.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_array.diminfo[1].strides))));
 
       /* "algorithms.pyx":105
- *             x_step = abs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+ *             x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step             # <<<<<<<<<<<<<<
  *             if delta >= threshhold:
  *                 sum += delta
@@ -3277,7 +3277,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
       __pyx_v_delta = (__pyx_v_x_step + __pyx_v_y_step);
 
       /* "algorithms.pyx":106
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step
  *             if delta >= threshhold:             # <<<<<<<<<<<<<<
  *                 sum += delta
@@ -3295,7 +3295,7 @@ static PyObject *__pyx_pf_10algorithms_6sum_modified_laplacian(CYTHON_UNUSED PyO
         __pyx_v_sum = (__pyx_v_sum + __pyx_v_delta);
 
         /* "algorithms.pyx":106
- *             y_step = abs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+ *             y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
  *             delta = x_step + y_step
  *             if delta >= threshhold:             # <<<<<<<<<<<<<<
  *                 sum += delta

@@ -9,8 +9,8 @@ __pycache__/
 
 # C extensions
 *.so
-algorithms.c
-algorithms.html
+*.c
+*.html
 
 # Distribution / packaging
 .Python

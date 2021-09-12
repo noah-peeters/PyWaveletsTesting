@@ -8,8 +8,8 @@ from time import time
 input_folder = "test_images/input/"
 output_folder = "test_images/output/"
 wavelet_to_use = "db4"
-spatial_frequency_kernel_size = (20, 20)  # Spatial frequency block size in pixels
-SML_threshold = 7
+spatial_frequency_kernel_size = (8, 8)  # Spatial frequency block size in pixels
+SML_threshold = 2
 
 from algorithms import (
     spatial_frequency,
