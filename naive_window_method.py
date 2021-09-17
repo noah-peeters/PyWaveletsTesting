@@ -1,7 +1,5 @@
 import numpy as np
 import cv2
-import pywt
-import pywt.data
 import glob
 from time import time
 
@@ -31,13 +29,6 @@ def _time_it(f):
         return r
 
     return wrapper
-
-
-@_time_it
-def compute_wavelet(image, wavelet_name):
-    # Convert to float for more resolution for use with pywt
-    # Format: LL, (LH, HL, HH)
-    return pywt.dwt2(np.float32(image), wavelet_name)
 
 
 # Compute the focus measures of a list of arrays
@@ -96,64 +87,21 @@ def compute_focus_measures(
                 x_offset : (x_offset + kernel_size[1]),
             ] = tiles_per_array[best_fm_image_index][y_tile_index, x_tile_index]
 
-    # for y_tile_index, _ in enumerate(tiles_per_array[0]):
-    #     y_offset = y_tile_index * kernel_size[0]
-    #     for x_tile_index, _ in enumerate(tiles_per_array[0][0]):
-    #         # Get index of image with best tile (most in focus / highest FM)
-    #         best_image_index = 0
-    #         for ca_index, tiles in enumerate(tiles_per_array):
-    #             # Is new image's tile more in focus? (higher FM)
-    #             if (
-    #                 fm_per_array[ca_index][y_tile_index][x_tile_index]
-    #                 > fm_per_array[best_image_index][y_tile_index][x_tile_index]
-    #             ):
-    #                 best_image_index = ca_index
-
-    #         x_offset = x_tile_index * kernel_size[1]
-    #         if x_offset < 0:
-    #             x_offset = 0
-    #         if y_offset < 0:
-    #             y_offset = 0
-
-    #         output_array[
-    #             y_offset : (y_offset + kernel_size[0]),
-    #             x_offset : (x_offset + kernel_size[1]),
-    #         ] = tiles_per_array[ca_index][y_tile_index][x_tile_index]
-
     return output_array
 
 
 start_time = time()
 
-wavelet_transforms = []
+images = []
 for filename in glob.glob(input_folder + "*.jpg"):
     # Load image
     image = cv2.imread(filename)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    wavelet_transforms.append(compute_wavelet(image, wavelet_to_use))
-
-# Sort wavelet coefficients together
-ll, lh, hl, hh = [], [], [], []
-for v in wavelet_transforms:
-    # Low freq.
-    ll.append(v[0])
-    # High freq.
-    lh.append(v[1][0])
-    hl.append(v[1][1])
-    hh.append(v[1][2])
+    image = np.float32(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY))
+    images.append(image)
 
 # Approximation coefficient
-ll = compute_focus_measures(ll, spatial_frequency_kernel_size, spatial_frequency)
-
-lh = compute_focus_measures(
-    lh, spatial_frequency_kernel_size, sum_modified_laplacian, SML_threshold
-)
-hl = compute_focus_measures(
-    hl, spatial_frequency_kernel_size, sum_modified_laplacian, SML_threshold
-)
-hh = compute_focus_measures(
-    hh, spatial_frequency_kernel_size, sum_modified_laplacian, SML_threshold
+output_image = compute_focus_measures(
+    images, spatial_frequency_kernel_size, spatial_frequency
 )
 
 # ll = np.maximum.reduce(ll)
@@ -162,7 +110,6 @@ hh = compute_focus_measures(
 # hh = pad_array(np.mean(hh, axis=0), np.array(spatial_frequency_kernel_size))
 
 # IDWT and write output image
-output_image = pywt.idwt2((ll, (lh, hl, hh)), wavelet_to_use)
 cv2.imwrite(output_folder + "output.jpg", output_image)
 
 print("Wrote output image.")
