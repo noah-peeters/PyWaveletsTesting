@@ -25,5 +25,6 @@ def pad_images(list images):
     # Pad arrays
     cdef int i = 0
     for i in range(0, len(images)):
-        pad_array(images[i])
+        images[i] = pad_array(images[i])
+    return images
         
