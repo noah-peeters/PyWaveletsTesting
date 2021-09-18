@@ -1,6 +1,7 @@
 # type: ignore
 import numpy as np
 cimport numpy as np
+cimport cython
 from libc.math cimport fmax, floor, log, fabs
 
 # Pad an array to be square to the closest power of 2 (>=axis_length)
