@@ -19,21 +19,20 @@ cdef pad_array(np.ndarray[np.float32_t, ndim=2] array):
     cdef int x_pad_amount = closest_power - x_length
     return np.pad(array, [(0, int(y_pad_amount)), (0, int(x_pad_amount))], mode="constant", constant_values=0)
 
-# Modified Laplacian (ML) at pixel
-cdef modified_laplacian(np.ndarray[np.float32_t, ndim=2] array, int y, int x, int step):
-    cdef double x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
-    cdef double y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
-    return x_step + y_step
-
 # Compute gradient map for an image
 cdef compute_image_gradient(np.ndarray[np.float32_t, ndim=2] array):
     cdef int step = 1
-    cdef int h = array.shape[0]
-    cdef int w = array.shape[1]
+    cdef int h = array.shape[0] - 1
+    cdef int w = array.shape[1] - 1
+    cdef int x, y
+    cdef double x_step, y_step, modified_laplacian
 
     for y in range(0, h):
         for x in range(0, w):
-            array[y, x] = modified_laplacian(array, y, x, step)
+            x_step = fabs(2 * array[y, x] - array[y, x - step] - array[y, x + step])
+            y_step = fabs(2 * array[y, x] - array[y - step, x] - array[y + step, x])
+            modified_laplacian = x_step + y_step
+            array[y, x] = modified_laplacian
 
     return array
 
