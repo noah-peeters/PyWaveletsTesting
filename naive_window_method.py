@@ -7,8 +7,8 @@ input_folder = "test_images/input/"
 output_folder = "test_images/output/"
 wavelet_to_use = "db4"
 spatial_frequency_kernel_size = (
-    32,
-    64,
+    5,
+    5,
 )  # Spatial frequency block size in pixels (y, x)
 SML_threshold = 10
 

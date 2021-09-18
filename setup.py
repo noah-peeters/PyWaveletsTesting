@@ -5,6 +5,7 @@ import numpy
 
 ext_modules = [
     Extension(r"algorithms", [r"algorithms.pyx"]),
+    Extension(r"quadtree_algorithms", [r"quadtree_algorithms.pyx"]),
 ]
 
 setup(
