@@ -24,7 +24,8 @@ cdef pad_array(np.ndarray[np.float32_t, ndim=2] array):
 def pad_images(list images):
     # Pad arrays
     cdef int i = 0
-    for i in range(0, len(images)):
+    cdef int amount = len(images)
+    for i in range(0, amount):
         images[i] = pad_array(images[i])
     return images
         
