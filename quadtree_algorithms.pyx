@@ -36,6 +36,24 @@ cdef compute_image_gradient(np.ndarray[np.float32_t, ndim=2] array):
 
     return array
 
+# Split an array in four even pieces
+cdef split_quadtree(np.ndarray[np.float32_t, ndim=2] array):
+    cdef int array_height = array.shape[0]
+    cdef int array_width = array.shape[1]
+
+    # Width and height are the same (square image)
+    cdef int tile_size = array_height / 4
+
+    cdef np.ndarray tiled_array = array.reshape(
+        (
+            int(floor(array_height / tile_size)), # "floor" returns a float
+            int(tile_size),
+            int(floor(array_width / tile_size)),
+            int(tile_size),
+        )
+    )
+    return tiled_array.swapaxes(1, 2)
+
 
 # Compute sum of the weighted modified Laplacian (SWML) of array
 @cython.cdivision(True)
